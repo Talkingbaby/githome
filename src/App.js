@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 import Navbar from './ui/Navbar';
 import Body from './ui/Body';
@@ -9,12 +10,30 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        userInfo: ''
+        userName: '',
+        userInfo: '',
+        results: ''
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.callUser = this.callUser.bind(this);
+    this.callUserRepos = this.callUserRepos.bind(this);
 }
 
-  componentWillMount() {
-    axios.get(`https://api.github.com/users/Talkingbaby`)
+  // componentWillMount() {
+  //   axios.get(`https://api.github.com/users/Talkingbaby`)
+  //   .then((response) => {
+  //       console.log(response);
+  //       this.setState({userInfo: response.data});
+  //   })
+  //   .catch(function (error) {
+  //       console.log(error);
+  //   });
+  // }
+
+  callUser(user) {
+    console.log('Hi');
+    axios.get(`https://api.github.com/users/${user}`)
     .then((response) => {
         console.log(response);
         this.setState({userInfo: response.data});
@@ -24,12 +43,39 @@ class App extends Component {
     });
   }
 
+  callUserRepos(user) {
+    axios.get(`https://api.github.com/users/${user}/repos`)
+        .then((response) => {
+            console.log(response);
+            this.setState({results: response.data});
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+}
+
+  handleChange(event) {
+    this.setState({userName: event.target.value});
+    const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 500);
+    const repoSearch = _.debounce((term) => { this.callUserRepos(this.state.userName) }, 500);
+    userSearch();
+    repoSearch();
+    console.log(this.state.userName);
+  }
+
   render() {
-    console.log(this.state.userInfo);
+    //console.log(this.state.userInfo);
+    // const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 300);
+
     return (
       <div>
-        <Navbar userInfo={this.state.userInfo}/>
-        <Body />
+        <Navbar
+          userInfo={this.state.userInfo}
+          userName={this.state.userName}
+          handleChange={this.handleChange}
+          /* onSearchTermChange={callUser} */ 
+        />
+        <Body repos={this.state.results} />
       </div>
     );
   }
