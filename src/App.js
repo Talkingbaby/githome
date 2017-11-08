@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 import Navbar from './ui/Navbar';
 import Body from './ui/Body';
@@ -16,6 +16,7 @@ class App extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.callUser = this.callUser.bind(this);
     this.callUserRepos = this.callUserRepos.bind(this);
 }
@@ -56,11 +57,17 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({userName: event.target.value});
-    const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 500);
-    const repoSearch = _.debounce((term) => { this.callUserRepos(this.state.userName) }, 500);
-    userSearch();
-    repoSearch();
+    // const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 1000);
+    // const repoSearch = _.debounce((term) => { this.callUserRepos(this.state.userName) }, 1000);
+    // userSearch();
+    // repoSearch();
     console.log(this.state.userName);
+  }
+
+  handleSearch() {
+    // this.callUser();
+    // this.callUserRepo();
+    console.log("I work!");
   }
 
   render() {
@@ -73,6 +80,7 @@ class App extends Component {
           userInfo={this.state.userInfo}
           userName={this.state.userName}
           handleChange={this.handleChange}
+          handleSearch={this.handleSearch}
           /* onSearchTermChange={callUser} */ 
         />
         <Body repos={this.state.results} />

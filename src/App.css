@@ -6,3 +6,9 @@
   height: 100vh;
   border-right: 1px dotted rgba(0,0,0,0.5);
 }
+.fa {
+  color: black;
+}
+.fa-github {
+  font-size: 3rem;
+}
