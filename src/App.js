@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        userName: '',
+        userName: 'freeCodeCamp',
         userInfo: '',
         results: ''
     };
@@ -21,19 +21,12 @@ class App extends Component {
     this.callUserRepos = this.callUserRepos.bind(this);
 }
 
-  // componentWillMount() {
-  //   axios.get(`https://api.github.com/users/Talkingbaby`)
-  //   .then((response) => {
-  //       console.log(response);
-  //       this.setState({userInfo: response.data});
-  //   })
-  //   .catch(function (error) {
-  //       console.log(error);
-  //   });
-  // }
+  componentWillMount() {
+    this.callUser(this.state.userName);
+    this.callUserRepos(this.state.userName);
+  }
 
   callUser(user) {
-    console.log('Hi');
     axios.get(`https://api.github.com/users/${user}`)
     .then((response) => {
         console.log(response);
@@ -53,7 +46,7 @@ class App extends Component {
         .catch(function (error) {
             console.log(error);
         });
-}
+  }
 
   handleChange(event) {
     this.setState({userName: event.target.value});
@@ -65,9 +58,8 @@ class App extends Component {
   }
 
   handleSearch() {
-    // this.callUser();
-    // this.callUserRepo();
-    console.log("I work!");
+    this.callUser(this.state.userName);
+    this.callUserRepos(this.state.userName);
   }
 
   render() {
@@ -83,7 +75,9 @@ class App extends Component {
           handleSearch={this.handleSearch}
           /* onSearchTermChange={callUser} */ 
         />
-        <Body repos={this.state.results} />
+        <Body
+          user={this.state.userName}
+          repos={this.state.results} />
       </div>
     );
   }
