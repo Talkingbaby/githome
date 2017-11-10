@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import _ from 'lodash';
+import _ from 'lodash';
 
 import Navbar from './ui/Navbar';
 import Body from './ui/Body';
@@ -16,7 +16,7 @@ class App extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    // this.handleSearch = this.handleSearch.bind(this);
     this.callUser = this.callUser.bind(this);
     this.callUserRepos = this.callUserRepos.bind(this);
 }
@@ -50,21 +50,18 @@ class App extends Component {
 
   handleChange(event) {
     this.setState({userName: event.target.value});
-    // const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 1000);
-    // const repoSearch = _.debounce((term) => { this.callUserRepos(this.state.userName) }, 1000);
-    // userSearch();
-    // repoSearch();
-    console.log(this.state.userName);
+    const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 1500);
+    const repoSearch = _.debounce((term) => { this.callUserRepos(this.state.userName) }, 1500);
+    userSearch();
+    repoSearch();
   }
 
-  handleSearch() {
-    this.callUser(this.state.userName);
-    this.callUserRepos(this.state.userName);
-  }
+  // handleSearch() {
+  //   this.callUser(this.state.userName);
+  //   this.callUserRepos(this.state.userName);
+  // }
 
   render() {
-    //console.log(this.state.userInfo);
-    // const userSearch = _.debounce((term) => { this.callUser(this.state.userName) }, 300);
 
     return (
       <div>

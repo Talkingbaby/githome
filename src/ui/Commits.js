@@ -14,12 +14,8 @@ const CommitItem = (props) => {
 }
 
 class Commits extends Component {
-    // componentWillReceiveProps() {
-    //     console.log(this.props.commits);
-    // }
 
     render() {
-        console.log('first commits: ', this.props.commits);
         return (
             <div className="col-6 justify-content-between p-3 commits">
                     {

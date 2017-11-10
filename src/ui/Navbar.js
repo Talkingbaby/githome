@@ -21,7 +21,7 @@ const Search = (props) => {
                 value={props.userName}
                 onChange={props.handleChange}
             />
-            <button onClick={props.handleSearch} className="btn btn-default ml-1">Search</button>
+            {/* <button onClick={props.handleSearch} className="btn btn-default ml-1">Search</button> */}
         </div>
     );
 }

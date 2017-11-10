@@ -24,13 +24,13 @@ const ResultItem = (props) => {
 
 class Results extends Component {
     render() {
-        console.log('props: ', this.props.results);
         return (
-            <div className="col-6 justify-content-between p-3 results">
+            <div className="col-12 justify-content-between p-3 results">
+                <h3>{`${this.props.user}'s Repos`}</h3>
                 <ul className="list-group">
                     {this.props.results.map((repos, i) => {
                         return <ResultItem
-                                    getRepoName={this.props.getRepoName}
+                                    callCommits={this.props.callCommits}
                                     key={i}
                                     info={{
                                         name: repos.name,
