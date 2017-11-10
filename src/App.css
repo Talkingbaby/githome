@@ -1,8 +1,25 @@
 .nav-img {
-  width: 3rem;
+  width: 2.5rem;
+}
+#body > .row {
+  padding-top: 3.5rem;
+  height: 100vh;
 }
 .results {
   overflow: scroll;
-  height: 100vh;
-  border-right: 1px dotted rgba(0,0,0,0.5);
+  height: 100%;
+  /* border-right: 1px dotted rgba(0,0,0,0.5); */
+}
+.commits {
+  overflow: scroll;
+  height: 50%;
+}
+.fa {
+  color: black;
+}
+.fa::before {
+  margin-right: 5px;
+}
+.list-group-item {
+  border: none;
 }
