@@ -4,7 +4,12 @@ import _ from 'lodash';
 
 import Navbar from './ui/Navbar';
 import Body from './ui/Body';
+import UserTour from './ui/UserTour';
 import './App.css';
+
+
+
+
 
 class App extends Component {
   constructor(props) {
@@ -21,7 +26,7 @@ class App extends Component {
     this.callUserRepos = this.callUserRepos.bind(this);
 }
 
-  componentWillMount() {
+  componentDidMount() {
     this.callUser(this.state.userName);
     this.callUserRepos(this.state.userName);
   }
@@ -64,7 +69,8 @@ class App extends Component {
   render() {
 
     return (
-      <div>
+      <div className="app">
+        <UserTour />
         <Navbar
           userInfo={this.state.userInfo}
           userName={this.state.userName}

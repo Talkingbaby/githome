@@ -16,7 +16,7 @@ const Search = (props) => {
         <div className="d-flex flex-row w-25">
             <input
                 type="text"
-                className="form-control"
+                className="form-control searchbar"
                 placeholder="Search for a User"
                 value={props.userName}
                 onChange={props.handleChange}

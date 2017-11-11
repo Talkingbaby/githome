@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { VictoryLine, VictoryChart, VictoryAxis,
-    VictoryTheme, VictoryStack } from 'victory';
+import { VictoryLine, VictoryChart, VictoryTheme, 
+    VictoryTooltip, VictoryVoronoiContainer } from 'victory';
 
 // const CommitItem = (props) => {
 //     return (
@@ -26,29 +26,30 @@ class Charts extends Component {
                         this.props.commits === '' ? 
                             null 
                             : 
-                        <VictoryChart
-                            theme={VictoryTheme.material}
-                            domainPadding={30}
-                        >
-                            {/* <VictoryAxis
-                                // tickValues specifies both the number of ticks and where
-                                // they are placed on the axis
-                                tickValues={stats.map((week, i) => i)}
-                                tickFormat={stats.map((week, i) => `week ${i}`)}
-                            />
-                            <VictoryAxis
-                                dependentAxis
-                                // tickFormat specifies how ticks should be displayed
-                                tickFormat={(x) => (x * 10)}
-                            /> */}
-                                        <VictoryLine
-                                        style={{
-                                          data: { stroke: "#c43a31" },
-                                          parent: { border: "1px solid #ccc"}
-                                        }}
-                                        data={this.props.stats.map((week) => week[1])}
-                                      />
-                        </VictoryChart>
+                            <VictoryChart
+                                theme={VictoryTheme.material}
+                                domainPadding={30}
+                                containerComponent={
+                                    <VictoryVoronoiContainer voronoiDimension="x"
+                                    labels={(datum) => datum.y}
+                                    labelComponent={<VictoryTooltip cornerRadius={0} flyoutStyle={{fill: "white"}}/>}/>
+                                }
+                            >
+                                <VictoryLine
+                                    style={{
+                                        data: { stroke: "green" },
+                                        parent: { border: "1px solid #ccc" }
+                                    }}
+                                    data={this.props.stats.map((week) => week[1] || 0)}
+                                />
+                                <VictoryLine
+                                    style={{
+                                        data: { stroke: "red" },
+                                        parent: { border: "1px solid #ccc" }
+                                    }}
+                                    data={this.props.stats.map((week) => Math.abs(week[2] || 0))}
+                                />
+                            </VictoryChart>
                     }
             </div>
         );
