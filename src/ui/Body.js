@@ -1,67 +1,78 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import _ from 'lodash';
 
 import RepoResults from './RepoResults';
 import Commits from './Commits';
+import Charts from './Charts';
 
 class Body extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        commits: '',
-        repoName: ''
+      commits: '',
+      repoName: '',
+      stats: ''
     };
 
     this.callCommits = this.callCommits.bind(this);
-}
+    this.callRepoStats = this.callRepoStats.bind(this);
+  }
 
-// callCommits() {
-//   axios.get(`https://api.github.com/repos/${this.props.user}/${this.state.repoName}/commits`)
-//   .then((response) => {
-//       console.log('commits!!!! ',response);
-//       this.setState({commits: response.data});
-//   })
-//   .catch(function (error) {
-//       console.log(error);
-//   });
-// }
+  callCommits(e) {
+    let repoName = e.target.innerText;
+    const user = this.props.user;
 
-callCommits(e) {
-  let repoName = e.target.innerText;
-
-  axios.get(`https://api.github.com/repos/${this.props.user}/${repoName}/commits`)
-  .then((response) => {
-      console.log('commits!!!! ',response.data);
-      this.setState({
-        commits: response.data,
-        repoName
+    axios.get(`https://api.github.com/repos/${user}/${repoName}/commits`)
+      .then((response) => {
+        this.setState({
+          commits: response.data,
+          repoName
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-  })
-  .catch(function (error) {
-      console.log(error);
-  });
-}
+
+      this.callRepoStats(user, repoName);
+  }
+
+  callRepoStats(user, repoName) {
+    let stats = this.state.stats;
+
+    axios.get(`https://api.github.com/repos/${user}/${repoName}/stats/code_frequency`)
+      .then((response) => {
+        this.setState({
+          stats: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   render() {
-      let results;
+    let results;
 
-      if(typeof this.props.repos === 'object'){
-        results = <RepoResults
-                    callCommits={this.callCommits}
-                    results={this.props.repos}/>;
-      } else {
-        results = null;
-      }
-      console.log('body repos: ', this.props.repos);
+    if (typeof this.props.repos === 'object') {
+      results = <RepoResults
+        user={this.props.user}
+        callCommits={this.callCommits}
+        results={this.props.repos} />;
+    } else {
+      results = null;
+    }
+
     return (
       <div id="body" className="container-fluid">
-          <div className="row">
-            { results }
-            <Commits
-              repoName={this.state.repoName}
-              commits={this.state.commits}
-            />
-          </div>
+        <div className="row">
+          {results}
+          { this.state.commits === '' ? null : <Commits
+            repoName={this.state.repoName}
+            commits={this.state.commits}
+          /> }
+          { this.state.stats === '' ? null : <Charts stats={this.state.stats}/> }
+        </div>
       </div>
     );
   }
