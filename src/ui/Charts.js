@@ -12,10 +12,13 @@ class Charts extends Component {
 
         return (
             <div className="col-12 justify-content-between charts">
-                <h3>Commit code addition/deletions</h3>
-                            <VictoryChart
+                <div className="card">
+                            <div className="card-body">
+                                <h4 className="card-title">Commit code addition/deletions</h4>
+                                <VictoryChart
                                 theme={VictoryTheme.material}
-                                domainPadding={30}
+                                height={250}
+                                domainPadding={10}
                                 containerComponent={
                                     <VictoryVoronoiContainer voronoiDimension="x"
                                     labels={(d) => `y: ${d.y}`}
@@ -37,6 +40,8 @@ class Charts extends Component {
                                     data={data2}
                                 />
                             </VictoryChart>
+                            </div>
+                    </div>                            
             </div>
         );
     }

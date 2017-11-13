@@ -18,28 +18,31 @@ class Commits extends Component {
     render() {
         return (
             <div className="col-12 justify-content-between p-3 commits">
-                    {
-                        this.props.commits === '' ? 
-                            null 
-                            : 
-                            <div>
-                                <h3>{this.props.repoName} Commits</h3>
-                                <ul className="list-group">
+                {
+                    this.props.commits === ''
+                        ?
+                        null
+                        :
+                        <div className="card" >
+                            <div className="card-body">
+                                <h4 className="card-title">{this.props.repoName} Commits</h4>
+                            </div>
+                            <ul className="list-group list-group-flush">
                                 {
                                     this.props.commits.map((commit, i) => {
-                                    return <CommitItem
-                                                key={i}
-                                                info={{
-                                                    name: commit.commit.author.name,
-                                                    url: commit.html_url,
-                                                    message: commit.commit.message
-                                                }}
-                                            />
-                                        })
+                                        return <CommitItem
+                                            key={i}
+                                            info={{
+                                                name: commit.commit.author.name,
+                                                url: commit.html_url,
+                                                message: commit.commit.message
+                                            }}
+                                        />
+                                    })
                                 }
                             </ul>
-                            </div>
-                    }
+                        </div>
+                }
             </div>
         );
     }

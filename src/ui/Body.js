@@ -82,7 +82,7 @@ class Body extends Component {
               ?
               null
               :
-              <div className="col-6 repo-data">
+              <div className="col-7 repo-data">
                 <div className="row">
                 <Commits
                   repoName={this.state.repoName}

@@ -1,7 +1,7 @@
 .nav-img {
   width: 2.5rem;
 }
-#body {
+#body > .row{
   padding-top: 4rem;
   height: 100vh;
 }
@@ -22,7 +22,7 @@
   height: 50%;
 }
 .charts {
-  height: 50%;
+  height: 25rem;
 }
 .fa {
   color: black;
