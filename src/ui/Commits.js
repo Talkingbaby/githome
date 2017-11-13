@@ -17,7 +17,7 @@ class Commits extends Component {
 
     render() {
         return (
-            <div className="col-6 justify-content-between p-3 commits">
+            <div className="col-12 justify-content-between p-3 commits">
                     {
                         this.props.commits === '' ? 
                             null 

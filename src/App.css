@@ -1,21 +1,28 @@
 .nav-img {
   width: 2.5rem;
 }
-#body > .row {
+#body {
   padding-top: 4rem;
   height: 100vh;
 }
+.row {
+  height: 100%;
+}
+.repo-data {
+  width: 100%;
+  border-top: 1px dotted black;
+}
 .results {
   overflow: scroll;
-  height: 40%;
+  height: 100%;
   /* border-right: 1px dotted rgba(0,0,0,0.5); */
 }
 .commits {
   overflow: scroll;
-  height: 60%;
+  height: 50%;
 }
 .charts {
-  height: 60%;
+  height: 50%;
 }
 .fa {
   color: black;

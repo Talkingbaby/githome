@@ -7,13 +7,12 @@ class Charts extends Component {
 
     render() {
         let stats = this.props.stats;
-        console.log('stats!!! ', stats);
+        let data1 = stats.map((week) =>Math.abs(week[1]));
+        let data2 = stats.map((week) =>Math.abs(week[2]));
+
         return (
-            <div className="col-6 justify-content-between charts">
-                    {
-                        this.props.commits === '' ? 
-                            null 
-                            : 
+            <div className="col-12 justify-content-between charts">
+                <h3>Commit code addition/deletions</h3>
                             <VictoryChart
                                 theme={VictoryTheme.material}
                                 domainPadding={30}
@@ -28,25 +27,16 @@ class Charts extends Component {
                                         data: { stroke: "green" },
                                         parent: { border: "1px solid #ccc" }
                                     }}
-                                    data={stats.map((week) =>Math.abs(week[1]))}
+                                    data={data1}
                                 />
                                 <VictoryLine
                                     style={{
                                         data: { stroke: "red" },
                                         parent: { border: "1px solid #ccc" }
                                     }}
-                                    data={stats.map((week) => Math.abs(week[2]))}
+                                    data={data2}
                                 />
-                                {/* <VictoryLine
-                                    style={{
-                                        data: { stroke: "black" },
-                                        parent: { border: "1px solid #ccc" }
-                                    }}
-                                    data={this.props.stats.map((week) => Math.abs(week[3]))}
-                                /> */}
-
                             </VictoryChart>
-                    }
             </div>
         );
     }

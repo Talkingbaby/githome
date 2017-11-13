@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import _ from 'lodash';
 
 import RepoResults from './RepoResults';
 import Commits from './Commits';
@@ -19,6 +18,10 @@ class Body extends Component {
     this.callRepoStats = this.callRepoStats.bind(this);
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    console.log('nextstate: ', nextState);
+  }
+
   callCommits(e) {
     let repoName = e.target.innerText;
     const user = this.props.user;
@@ -34,16 +37,16 @@ class Body extends Component {
         console.log(error);
       });
 
-      this.callRepoStats(user, repoName);
+    this.callRepoStats(user, repoName);
   }
 
   callRepoStats(user, repoName) {
-    let stats = this.state.stats;
-
     axios.get(`https://api.github.com/repos/${user}/${repoName}/stats/code_frequency`)
       .then((response) => {
+        let data = response.data;
+
         this.setState({
-          stats: response.data,
+          stats: data,
         });
       })
       .catch(function (error) {
@@ -52,26 +55,43 @@ class Body extends Component {
   }
 
   render() {
-    let results;
+    let repos;
+    let charts;
 
     if (typeof this.props.repos === 'object') {
-      results = <RepoResults
+      repos = <RepoResults
         user={this.props.user}
         callCommits={this.callCommits}
         results={this.props.repos} />;
     } else {
-      results = null;
+      repos = null;
+    }
+
+    if (Object.keys(this.state.stats).length === 0) {
+      charts = <h3>There are no stats :(</h3>;
+    } else {
+      charts = <Charts stats={this.state.stats} />;
     }
 
     return (
       <div id="body" className="container-fluid">
         <div className="row">
-          {results}
-          { this.state.commits === '' ? null : <Commits
-            repoName={this.state.repoName}
-            commits={this.state.commits}
-          /> }
-          { this.state.stats === '' ? null : <Charts stats={this.state.stats}/> }
+          {repos}
+          {
+            this.state.commits === ''
+              ?
+              null
+              :
+              <div className="col-6 repo-data">
+                <div className="row">
+                <Commits
+                  repoName={this.state.repoName}
+                  commits={this.state.commits}
+                />
+                {charts}
+                </div>
+              </div>
+          }
         </div>
       </div>
     );

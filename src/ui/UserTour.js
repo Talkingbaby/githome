@@ -36,7 +36,7 @@ export default class UserTour extends Component {
 							selector: ".results",
 							title: <h4 style={{color: "black", padding: '.5rem'}}>Repo List</h4>,
 							body: <p style={{color: "black", padding: '.5rem'}}>A list of the user's repos go here.</p>,
-							position: 'bottom',
+							position: 'right',
 							backButtonText: 'prev'
 						},
 						{
