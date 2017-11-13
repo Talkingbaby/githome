@@ -24,9 +24,7 @@ class Commits extends Component {
                         null
                         :
                         <div className="card" >
-                            <div className="card-body">
-                                <h4 className="card-title">{this.props.repoName} Commits</h4>
-                            </div>
+                            <div className="card-header">{this.props.repoName} Commits</div>
                             <ul className="list-group list-group-flush">
                                 {
                                     this.props.commits.map((commit, i) => {

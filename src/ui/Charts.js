@@ -13,8 +13,8 @@ class Charts extends Component {
         return (
             <div className="col-12 justify-content-between charts">
                 <div className="card">
+                    <div className="card-header">Commit code addition/deletions</div>
                             <div className="card-body">
-                                <h4 className="card-title">Commit code addition/deletions</h4>
                                 <VictoryChart
                                 theme={VictoryTheme.material}
                                 height={250}
