@@ -1,1 +1,0 @@
-{"version":3,"sources":["App.css"],"names":[],"mappings":"AAAA,SACE,UAAY,CAEd,SACE,gBACA,aACA,sCAAyC","file":"static/css/main.83129ade.css","sourcesContent":[".nav-img {\n  width: 3rem;\n}\n.results {\n  overflow: scroll;\n  height: 100vh;\n  border-right: 1px dotted rgba(0,0,0,0.5);\n}\n\n\n// WEBPACK FOOTER //\n// ./src/App.css"],"sourceRoot":""}
