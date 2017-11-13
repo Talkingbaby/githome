@@ -21,7 +21,6 @@ class App extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    // this.handleSearch = this.handleSearch.bind(this);
     this.callUser = this.callUser.bind(this);
     this.callUserRepos = this.callUserRepos.bind(this);
 }
@@ -60,11 +59,6 @@ class App extends Component {
     userSearch();
     repoSearch();
   }
-
-  // handleSearch() {
-  //   this.callUser(this.state.userName);
-  //   this.callUserRepos(this.state.userName);
-  // }
 
   render() {
 

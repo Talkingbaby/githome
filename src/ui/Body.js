@@ -34,11 +34,12 @@ class Body extends Component {
         console.log(error);
       });
 
-    const callRepoStats = _.debounce((term) => { this.callRepoStats(user, repoName); }, 1000);
-    callRepoStats();
+      this.callRepoStats(user, repoName);
   }
 
   callRepoStats(user, repoName) {
+    let stats = this.state.stats;
+
     axios.get(`https://api.github.com/repos/${user}/${repoName}/stats/code_frequency`)
       .then((response) => {
         this.setState({

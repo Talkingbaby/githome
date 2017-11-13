@@ -24,7 +24,6 @@ export default class UserTour extends Component {
 					onNext={(step) => this.setState({tourStep: step})}
 					onBack={(step) => this.setState({tourStep: step})}
 					onCancel={() => this.setState({isTourActive: false})}
-					hideClose={true}
 					steps={[
 						{
 							step: 1,
